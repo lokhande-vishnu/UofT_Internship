@@ -1,0 +1,123 @@
+function [allclassifiers] = trainer(pars,cvaldata)
+
+
+training= permute(cvaldata,[3 2 1]);
+len=size(pars,1);
+options=[];
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig1{i}=[];
+%         trainedClassifier1{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=1,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig1{i}=eigvector;
+    trainedClassifier1{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction','gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{1,1}=trainedClassifier1;
+allclassifiers{1,2}=eig1;
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig2{i}=[];
+%         trainedClassifier2{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=2,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig2{i}=eigvector;
+    trainedClassifier2{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{2,1}=trainedClassifier2;
+allclassifiers{2,2}=eig2;
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig3{i}=[];
+%         trainedClassifier3{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=3,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig3{i}=eigvector;
+    trainedClassifier3{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{3,1}=trainedClassifier3;
+allclassifiers{3,2}=eig3;
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig4{i}=[];
+%         trainedClassifier4{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=4,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig4{i}=eigvector;
+    trainedClassifier4{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{4,1}=trainedClassifier4;
+allclassifiers{4,2}=eig4;
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig5{i}=[];
+%         trainedClassifier5{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=5,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig5{i}=eigvector;
+    trainedClassifier5{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{5,1}=trainedClassifier5;
+allclassifiers{5,2}=eig5;
+
+for i=1:len
+    i
+    trainC= training(:,:,i);width=size(trainC,2);
+%     cul= sum(trainC(:,2:width),2);
+%     if sum(cul~=0)<5*6
+%         eig6{i}=[];
+%         trainedClassifier6{i}=[];
+%         continue;
+%     end
+%     trainC(cul==0,:)=[];
+    trainC(trainC(:,1)~=6,1)=0;
+    [eigvector, eigvalue] = mylda(trainC(:,1), options, trainC(:,2:width));
+    A = trainC(:,2:width)*eigvector;
+    eig6{i}=eigvector;
+    trainedClassifier6{i}= fitcsvm(A, trainC(:,1),'Cost',[0,1;2,0], 'KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 1);
+end
+allclassifiers{6,1}=trainedClassifier6;
+allclassifiers{6,2}=eig6;
+
+allclassifiers{7,1}=pars;
+end

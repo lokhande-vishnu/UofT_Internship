@@ -1,0 +1,13 @@
+Reciever alone doesn't work
+error 74
+
+Broadcast the signal first from the acquiistion and then 
+process the signal 
+
+
+if there is an error in matlab script, then close all the 
+programs and start them again OR just clear all the variables
+from the workspace
+
+After stop is pressed, the program has to read for two more 
+trials before it actually stops

@@ -1,0 +1,22 @@
+%INPUTS  - data_ch1, data_ch2, data_ch3, data_ch4
+%OUTPUTS - class
+
+
+path(path, pa);
+
+
+%% Feature Extraction
+feas= featureEx(data_ch1,data_ch2,data_ch3,data_ch4);
+
+%% Prediction
+if firstS==0
+load 'allclassifiers';
+class=predictor(allclassifiers,feas);
+else
+class =10;
+end
+
+%% Data addition
+append=cat(3,append,[C_class*ones(size(feas,1),1),feas]);
+
+

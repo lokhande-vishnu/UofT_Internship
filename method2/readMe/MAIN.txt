@@ -1,0 +1,62 @@
+The methods used in "Modus Operandi 2"  revolve around the central idea of "ACCUMULATION".
+THE KEY IDEAS ARE
+1. INCREASE THE TRAINING SAMPLE SIZE
+2. INCREASE THE FEATURES SIZE.
+3. WORK WITH RAW SPECTROGRAMS
+4. APPLY FILTERS ON THE HISTOGRAMS.
+
+
+
+DESCRIPTION OF THE TECHNIQUES
+WEEK 4,5
+1. Used only single electrode, single threshold value and used the entire histogram as features.
+
+2. Same as above but increased the training sample size by accumulating all the electrode data.
+False high accuracy, one electrode was predicting the other electrode.  
+
+WEEK6
+3. "Technique 2" + dimensionality reduction of the histogram.
+
+4. Increased the number oF features by accumulating all the electrode data.
+
+5. Used raw spectrogram instead of the histogram and tried the above techniques on it.
+Gave 40% accuracy as it differentiated based on intensities at some electrodes 
+
+6. Cross-Correlated one electrode data with the other electrode data as a substitute procedure for ICA.
+
+7. Some other minor variations have been tried which have been listed along with their accuracies 
+in "week6 excel sheet".
+
+WEEK 7
+8. The average of all training samples has been consdered in order to identify  the specific regions
+of the histogram which would be consistent across all the training samples. Later for training the 
+classifier only these identified regions of the histogram have been looked upon(achieved by applying
+a somtheing like two-dimensional filter).
+This resulted in six filters for six classes and whichever filter would be applied to a new trial, 
+the classifier would predct the respective class.
+
+
+
+CODE DESCRIPTION
+FEATURE EXTRACTION
+"main..." performs the feature extraction with the help of "Spec_Smooth_Normailze" and "corr_tabulation".
+Different variations of "main"  are written by appending an underscore with it.
+The codes have to be uncommented appropriately for using the desired technique listed above.
+
+CLASSIFICATION
+Five fold classification has been performed either using "Classification Learner App" or using the codes
+titled "explicitcrossval...". 
+While using the app, take care of the fact that you don't end up predicting one electrode based on data 
+from other electrode. This often occurs when you increase the trainign sample size by ading all the 
+electrode information.
+Filtering codes can be directly called from "explicitcrossval" by uncommenting the required sections
+
+
+INSIGHTS
+1. The curse of dimensionality
+With the increase in dimensions, the data becomes more sparse. Hence, predictive power reduces with the 
+increase in number of dimensions (hughes effect). The problem can be solved by increasing the training
+sample size so as to encompass all the variations in the features.
+
+2. For a given trial, the data from all the electrodes are similar. This can be deduced from the behavior 
+of the classiifiers and from the dimension visualisation tools (eg tSNE_matlab)

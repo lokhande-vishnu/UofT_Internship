@@ -1,0 +1,46 @@
+Link to the classifier description is 
+http://www.mathworks.com/help/stats/choose-a-classifier.html 
+
+
+
+
+        Gauassian SVM
+    template = templateSVM('KernelFunction', 'gaussian', 'PolynomialOrder', [], 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 0);
+    trainedClassifier = fitcecoc(A,a_label, 'Learners', template, 'Coding', 'onevsone');
+    
+        Cubic SVM
+    template = templateSVM('KernelFunction', 'polynomial', 'PolynomialOrder', 5, 'KernelScale', 'auto', 'BoxConstraint', 1, 'Standardize', 0);
+    trainedClassifier = fitcecoc(A,a_label, 'Learners', template, 'Coding', 'onevsone');
+   
+    
+          fine KNN
+    trainedClassifier = fitcknn(A,a_label,'ClassNames', [1 2 3 4 5 6], 'Distance', 'Euclidean', 'Exponent', '', 'NumNeighbors', 2, 'DistanceWeight', 'Equal', 'StandardizeData', 1);
+   
+        simple tree
+    trainedClassifier = fitctree(A,a_label,'ClassNames', [1 2 3 4 5 6], 'SplitCriterion', 'gdi', 'MaxNumSplits', 10, 'Surrogate', 'off');
+    
+   
+    Decision trees with boosting 
+    trainedClassifier = fitensemble(A,a_label, 'AdaBoostM2', 200, 'Tree', 'Type', 'Classification', 'LearnRate', 1.000000e-01, 'ClassNames', [1 2 3 4 5 6]);
+   
+    Decision trees with bagging
+    trainedClassifier = fitensemble(A,a_label, 'Bag', 500, 'Tree', 'Type', 'Classification', 'ClassNames', [1 2 3 4 5 6]);
+   
+   
+    Subspace Discriminant
+    trainedClassifier = fitensemble(A,a_label, 'Subspace', 200, 'Discriminant', 'Type', 'Classification', 'NPredToSample', floor(size(A,2)/2),'ClassNames', [1 2 3 4 5 6]);
+   
+    RUS Boost 
+    trainedClassifier = fitensemble(A,a_label, 'RUSBoost', 200, 'Tree', 'Type', 'Classification', 'LearnRate', 1.000000e-01, 'ClassNames', [1 2 3 4 5 6]);
+    
+    Neural Networks   
+        trainFcn = 'trainscg';
+        hiddenLayerSize = 30;
+        net = patternnet(hiddenLayerSize);
+        net.divideParam.trainRatio = 100/100;
+        net.divideParam.valRatio = 0/100;
+        net.divideParam.testRatio = 0/100;
+        a=a';b=b';
+        predictors to be input in row format
+        responses row format + vector form
+        [net,tr] = train(net,a, full(ind2vec(b)));

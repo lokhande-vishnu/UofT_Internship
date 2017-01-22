@@ -1,0 +1,23 @@
+path(path, pa);
+
+if firstS==0
+load 'allclassifiers';
+else
+allclassifiers{7,2}=[];
+end
+
+cvaldata=cat(3,allclassifiers{7,2},append);
+
+
+%%Validating
+pars=Val_method1(cvaldata);
+
+%% TRAINING
+allclassifiers = trainer(pars,cvaldata);
+allclassifiers{7,2}=cvaldata;
+
+
+%% SAVING THE TRAINED CLASSIFIER
+matfile = fullfile(cd, 'allclassifiers.mat');
+save(matfile,'allclassifiers');
+
